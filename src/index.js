@@ -1,5 +1,7 @@
 import axios from "axios";
 import { createMarkupPhotos } from "./markup";
+import SimpleLightbox from "simplelightbox";
+import "simplelightbox/dist/simple-lightbox.min.css";
 
 
 const BASE_URL = 'https://pixabay.com/api/'
@@ -11,6 +13,9 @@ const loadMore = document.querySelector('.load-more');
 let currentPage = 1;
 let loadedPhotosCount = 0;
 let requestWord = '';
+
+
+
 
 loadMore.addEventListener('click', onLoad);
 
@@ -34,21 +39,27 @@ function onFormSubmit(event){
     loadMore.hidden = true;
     requestWord = event.target.elements.searchQuery.value;
     getPhotos(requestWord, currentPage)
-        .then((responce) => updateScreen(responce))
+        .then((responce) => {
+            alert(`Hooray! We found ${responce.data.totalHits} images.`);
+            updateScreen(responce)
+        })
         .catch(error => { console.log(error) })
     }
 
 function updateScreen(responce) {
     loadedPhotosCount += responce.data.hits.length;
-    console.log(loadedPhotosCount);
+    
 
     if (loadedPhotosCount < responce.data.totalHits) {
         loadMore.hidden = false;
     } else {
         loadMore.hidden = true;
+        alert("We're sorry, but you've reached the end of search results.")
     }
       
     gallery.insertAdjacentHTML('beforeend', createMarkupPhotos(responce.data.hits));
+    const lightbox = new SimpleLightbox('.gallery a', { /* options */ });
+    lightbox.refresh();
 }
 
 
@@ -60,7 +71,7 @@ function getPhotos(request, page = 1) {
         orientation: "horizontal",
         safesearch: "true",
         page: `${page}`,
-        per_page: "10",
+        per_page: "40",
         
     }
 })

@@ -1,2 +1,39 @@
 @import './common';
 @import './example';
+
+.search-form {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+    margin-top: 24px;
+    
+
+}
+
+.gallery {
+    display: grid;
+    // max-width: 1140px;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-auto-rows: 300px;
+    grid-gap: 12px;
+    justify-content: center;
+    padding: 0;
+    list-style: none;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.photo-card {
+    padding: 8px;
+   
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
+            0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+}
+
+.gallery-img {
+    max-width: 100%;
+    max-height: 220px;
+}
+.info {
+    display: flex;
+}
