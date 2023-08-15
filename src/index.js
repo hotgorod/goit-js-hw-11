@@ -2,6 +2,7 @@ import axios from "axios";
 import { createMarkupPhotos } from "./markup";
 import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 
 const BASE_URL = 'https://pixabay.com/api/'
@@ -38,9 +39,9 @@ function onFormSubmit(event){
     currentPage = 1;
     loadMore.hidden = true;
     requestWord = event.target.elements.searchQuery.value;
-    getPhotos(requestWord, currentPage)
+        getPhotos(requestWord, currentPage)
         .then((responce) => {
-            alert(`Hooray! We found ${responce.data.totalHits} images.`);
+            Notify.info(`Hooray! We found ${responce.data.totalHits} images.`);
             updateScreen(responce)
         })
         .catch(error => { console.log(error) })
@@ -54,7 +55,7 @@ function updateScreen(responce) {
         loadMore.hidden = false;
     } else {
         loadMore.hidden = true;
-        alert("We're sorry, but you've reached the end of search results.")
+        Notify.warning("We're sorry, but you've reached the end of search results.");
     }
       
     gallery.insertAdjacentHTML('beforeend', createMarkupPhotos(responce.data.hits));
