@@ -11,22 +11,20 @@
 }
 
 .load-more {
-    display: flex;
+    
     width: 250px;
     height: 65px;
     
-    margin-left: auto;
-    margin-right: auto;
     margin-bottom: 24px;
 
     background-color: rgb(243, 111, 133);
-   font-size: 34px;
-   color: white;
+    font-size: 34px;
+    color: white;
     justify-content: center;
-   align-items: center;
-   border-radius: 25px;
-   border: none;
-   cursor: pointer;
+    align-items: center;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
 
 }
 
