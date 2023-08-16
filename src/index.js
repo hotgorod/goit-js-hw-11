@@ -10,6 +10,7 @@ const API_KEY = '38827644-52da52720fd8c4c61744e2024'
 const gallery = document.querySelector('.gallery');
 const form = document.querySelector('.search-form');
 const loadMore = document.querySelector('.load-more');
+const lightbox = new SimpleLightbox('.gallery a', { /* options */ });
 let currentPage = 1;
 let loadedPhotosCount = 0;
 let requestWord = '';
@@ -31,7 +32,7 @@ async function onFormSubmit(event) {
     loadedPhotosCount = 0;
     currentPage = 1;
     loadMore.hidden = true;
-    requestWord = event.target.elements.searchQuery.value;
+    requestWord = event.target.elements.searchQuery.value.trim();
 
     try
     {
@@ -56,7 +57,7 @@ function updateScreen(responce) {
     }
       
     gallery.insertAdjacentHTML('beforeend', createMarkupPhotos(responce.data.hits));
-    const lightbox = new SimpleLightbox('.gallery a', { /* options */ });
+    
     lightbox.refresh();
 }
 
